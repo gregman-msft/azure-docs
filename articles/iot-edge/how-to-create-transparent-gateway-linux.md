@@ -50,8 +50,8 @@ The following steps walk you through the process of creating the certificates an
    1. Copy config and script files into your working directory.
 
       ```cmd
-      cp azure-iot-sdk-c/tools/CACertificates/*.cnf .
-      cp azure-iot-sdk-c/tools/CACertificates/certGen.sh .
+      cp ~/azure-iot-sdk-c/tools/CACertificates/*.cnf .
+      cp ~/azure-iot-sdk-c/tools/CACertificates/certGen.sh .
       chmod 700 certGen.sh 
       ```
 
@@ -113,13 +113,15 @@ One of the key capabilities of Azure IoT Edge is being able to deploy modules to
 3. Select **Set Modules**.
 4. Select **Next**.
 5. In the **Specify routes** step, you should have a default route that sends all messages from all modules to IoT Hub. If not, add the following code then select **Next**.
+
    ```JSON
    {
        "routes": {
-           "route": "FROM /* INTO $upstream"
+           "route": "FROM /messages/* INTO $upstream"
        }
    }
    ```
+ 
 6. In the Review template step, select **Submit**.
 
 ## Installation on the downstream device
@@ -165,7 +167,7 @@ You must initialize the IoT Hub device sdk with a connection string referring to
    ```
 
    >[!NOTE]
-   >This is a sample command which tests that everything has been set up correctly. You sohuld a message saying "verified OK".
+   >This is a sample command which tests that everything has been set up correctly. You should a message saying "verified OK".
    >
    >openssl s_client -connect mygateway.contoso.com:8883 -CAfile $CERTDIR/certs/azure-iot-test-only.root.ca.cert.pem -showcerts
 
